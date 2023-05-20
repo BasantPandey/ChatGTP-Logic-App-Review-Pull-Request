@@ -13,8 +13,8 @@ Here's a high-level overview of the Logic App workflow:
 1. A new pull request is created in ADO
 2. The Logic App is triggered and uses ChatGPT to generate a code review
 3. The Logic App creates a new code review in ADO using the output from ChatGPT
-## Authentication
-    1. App Registration for Logic App  [more info](/Step1/README.Md)
+## [Authentication](/Step1/README.Md)
+    1. App Registration for Logic App  
 ## Create Logic App
     1. Create Resoruce Group
     2. Add Logic App
