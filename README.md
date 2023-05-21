@@ -1,4 +1,4 @@
-# Using Azure Logic App Review Pull Request using chat GTP
+# Azure Logic App to Review Pull using chat GTP
 ![code review logic app](/Images/CodeReviewUsingLogicApp.PNG)
 ## Introduction
 
