@@ -1,4 +1,5 @@
 # Azure Logic App to Review Pull using chat GTP
+
 ![code review logic app](/Images/CodeReviewUsingLogicApp.PNG)
 ## Introduction
 
@@ -15,6 +16,7 @@ Here's a high-level overview of the Logic App workflow:
 1. A new pull request is created in ADO
 2. The Logic App is triggered and uses ChatGPT to generate a code review
 3. The Logic App creates a new code review in ADO using the output from ChatGPT
+![code review logic app](/Images/CodeReviewUsingLogicApp.PNG)
 ## [Authentication](/AppRegistration/README.Md)
     1. App Registration for Logic App  
 ![Azure permission ](Images/API%20Permissions.PNG)
@@ -30,7 +32,7 @@ Here's a high-level overview of the Logic App workflow:
     1. Get the Pull Information 
     2. Create comments to the pull request
 ![Dev ops APi](Images/ADOApis.PNG)
-## Configure Chat GPT to generate a code review comments
+## [Configure Chat GPT to generate a code review comments](/ConfigureChatGTP/README.md)
     1. Create Account 
     2. Create Token
     3. ChatGPT API to generate a code review
