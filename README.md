@@ -26,7 +26,7 @@ Here's a high-level overview of the Logic App workflow:
 ## [Create Web hook in Azure Devops](/Webhooks/README.md)
     1. Navigate to your Registory
 ![Azure Devops web hoock](Images/Trigger.PNG)
-## DevOps Api
+## [DevOps Api](DevOpsApi/README.md)
     1. Get the Pull Information 
     2. Create comments to the pull request
 ![Dev ops APi](Images/ADOApis.PNG)
