@@ -22,7 +22,7 @@ Here's a high-level overview of the Logic App workflow:
     1. Create Resoruce Group
     2. Add Logic App
         1. GTP Code Review Logic App
-[!Logic App](Images/LogicApp.PNG)
+![Logic App](Images/LogicApp.PNG)
 ## [Create Web hook in Azure Devops](/Webhooks/README.md)
     1. Navigate to your Registory
 ![Azure Devops web hoock](Images/Trigger.PNG)
