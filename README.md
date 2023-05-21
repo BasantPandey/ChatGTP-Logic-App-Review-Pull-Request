@@ -1,6 +1,7 @@
 # Azure Logic App to Review Pull using chat GTP
 
 ![code review logic app](/Images/CodeReviewUsingLogicApp.PNG)
+![code review comments](Images/PRRequest.PNG)
 ## Introduction
 
 1. First, you need to create a Logic App in Azure. You can do this by going to the Azure portal and searching for "Logic App" in the search bar. Then, click on "Create" and follow the prompts to set up your Logic App.Once you have your Logic App set up, you need to add a trigger. In this case, we want the Logic App to be triggered when a new pull request is created in ADO. To do this, add the "Azure DevOps - When a pull request is created" trigger to your Logic App.
