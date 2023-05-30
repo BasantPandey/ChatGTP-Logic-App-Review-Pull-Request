@@ -29,3 +29,12 @@ To create a Logic App in Azure, follow these steps:
 - Save and test your Logic App: As you build your Logic App workflow, make sure to save your progress periodically. You can also test your Logic App by triggering - the defined workflow manually or using sample data to ensure it functions as expected.
 
 - Enable and monitor your Logic App: Once you are satisfied with your Logic App workflow, enable it to start executing automatically based on the defined triggers. - You can also monitor the execution history, track errors, and set up alerts for your Logic App using Azure Monitor or other monitoring tools.
+
+List of operation
+
+1. Request=> When a HTTP request is received
+2. Data Operations => Parse JSON
+3. Variables => Initializes a variable.
+4. Variables => Initializes a variable.
+
+![logic app](images/LogicApp.png)
