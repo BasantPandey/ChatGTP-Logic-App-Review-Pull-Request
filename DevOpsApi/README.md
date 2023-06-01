@@ -1,3 +1,7 @@
+# Devops settings
+1. Provide the contribute access to the  [app](/AppRegistration/README.Md) that created in above app registration step. 
+![permission](images/contributePermission.png)
+![permission](images/userpermission.png)
 
 # Here are some of the rest API that used in workflow
 The following ADO REST API endpoints, replacing {organization} with your ADO organization name, {project} with your project name, {repositoryId} with your repository ID, and {commitId}.
