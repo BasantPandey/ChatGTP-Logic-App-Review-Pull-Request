@@ -38,3 +38,162 @@ List of operation
 4. Variables => Initializes a variable.
 
 ![logic app](images/LogicApp.png)
+
+1. Action : "When a HTTP request is received"
+2. Action : "Data Operations = > Specify the schema of JSON content."
+3. Action : Initializes a variable. 
+    - variable name: lastMergeSourceCommitUrl
+    - type : string
+    - value : as mentioned below.
+```json
+concat(triggerBody()?['resource']?['lastMergeCommit']?['url'],'/changes')
+```
+4. Data Operations new :  Constructs an arbitrary object from the action's inputs. (compose)
+    - inputs
+```json
+{
+  "client_id": "xxxxxxx-xxxxx-4b79-a2b4-xxxx",
+  "client_secret": ".xxxxx~K97ew1yfi7~xxxxx-nxqdu.",
+  "grant_type": "client_credentials",
+  "scope": "499b84ac-1321-427f-aa17-267ca6975798/.default"
+}
+```
+5. Parse Json
+    - content : `@outputs('Compose')`
+    - payload schema
+```json
+{
+    "properties": {
+        "client_id": {
+            "type": "string"
+        },
+        "client_secret": {
+            "type": "string"
+        },
+        "grant_type": {
+            "type": "string"
+        },
+        "scope": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+```
+6. HTTP : Choose a REST API to invoke.
+    - URI : `https://login.microsoftonline.com/tanantID/oauth2/v2.0/token`
+    - Method: Post
+    - Headers: 
+```json
+{
+  "Content-Type" : "application/x-www-form-urlencoded"
+}
+```
+- body
+```json
+uriComponentToString(concat('grant_type=', body('Parse_JSON_Request')?['grant_type'], '&scope=', body('Parse_JSON_Request')?['scope'], '&client_id=', body('Parse_JSON_Request')?['client_id'],'&client_secret=',body('Parse_JSON_Request')?['client_secret']))
+```
+7. Parse Json
+    - Cotent: Body
+    - Schema:
+```json
+{
+    "properties": {
+        "access_token": {
+            "type": "string"
+        },
+        "expires_in": {
+            "type": "integer"
+        },
+        "ext_expires_in": {
+            "type": "integer"
+        },
+        "token_type": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+```
+8.  HTTP : Choose a REST API to invoke.
+    - URI : use variable *lastMergeSourceUrl*
+    - Method: Get
+    - Headers: 
+
+```json
+{
+ "Accept": "@{concat('application','/json')}",
+      "Authorization": "@{concat(body('Parse_Token')?['token_type'],' ',body('Parse_Token')?['access_token'])}",
+      "Content-Type": "@{concat('application','/json')}"
+}
+```
+
+9. Parse Json
+    - content - body
+    - schema
+```json
+{
+    "properties": {
+        "changeCounts": {
+            "properties": {
+                "Edit": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "changes": {
+            "items": {
+                "properties": {
+                    "changeType": {
+                        "type": "string"
+                    },
+                    "item": {
+                        "properties": {
+                            "commitId": {
+                                "type": "string"
+                            },
+                            "gitObjectType": {
+                                "type": "string"
+                            },
+                            "objectId": {
+                                "type": "string"
+                            },
+                            "originalObjectId": {
+                                "type": "string"
+                            },
+                            "path": {
+                                "type": "string"
+                            },
+                            "url": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "item",
+                    "changeType"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+}
+```
+10. For each
+    - Select output from previous step `@body('Parse_Changes_response')?['changes']`
+    1. HTTP : Choose a REST API to invoke.
+        - URI: `@items('For_each')?['item']['url']`
+        - Method: Get
+        - Headers:
+```json
+{
+      "Authorization": "@{concat(body('Parse_Token')?['token_type'],' ',body('Parse_Token')?['access_token'])}",
+      "Content-Type": "@{concat('application','/json')}"
+    }
+```
+    
